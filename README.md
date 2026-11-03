@@ -1,26 +1,31 @@
-# [Project 2: Network Scanner](Network_Scanner)
+# Django Network Scanner
 
-## Overview
+A Python/Django learning project that discovers hosts on a local network using Scapy ARP packets, then checks a selected TCP port range. Results show device IP addresses, MAC addresses, and port/service labels in a web page.
 
-This Django project provides a web-based network scanning tool that identifies systems connected to the user's network. Utilizing the Django framework, the application displays the IP addresses and MAC addresses of the connected systems and identifies any open ports on those systems. The project leverages the power of Django's web framework for a user-friendly and interactive experience.
+## Repository map
 
-## Instructions
+- [scanner/views.py](scanner/views.py): ARP discovery, TCP probes, and request handling.
+- [templates/home.html](templates/home.html): scan form and results.
+- [Network_Scanner/](Network_Scanner/): Django project configuration.
+- [manage.py](manage.py): Django management entry point.
 
-1. Clone the repository.
-2. Install the required dependencies using the following command:
+## Setup outline
 
-    ```bash
-    pip install -r requirements.txt
-    ```
-3. Run the Django development server:
+Requires Python, Django, Scapy, and an environment that permits raw-packet operations. The repository **does not currently include a requirements.txt**, so the old `pip install -r requirements.txt` instruction was not usable.
 
-    ```bash
-    python manage.py runserver
-    ```
-4. Open your web browser and navigate to `http://localhost:8000` to access the network scanner application.
+Create a fresh virtual environment and install Django and Scapy, then review the project settings for your machine. Dependency versions are not pinned and current-version compatibility has not been established.
 
-5. Use the web interface to scan the network and view the list of connected systems, their IP addresses, MAC addresses, and open ports.
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+python3 -m pip install django scapy
+python3 manage.py runserver 127.0.0.1:8000
+```
 
-## Example
+Open `http://127.0.0.1:8000`. Scan only a lab network you are authorized to test. Raw packets may require additional operating-system permissions; do not expose an elevated development server to an untrusted network.
 
-Visit `http://localhost:8000` in your web browser after running the development server to start using the network scanner.
+## Current limits
+
+This is synchronous learning code with simple TCP response checks, not a production asset inventory. Port/service labels are guesses from a static mapping, not verified service fingerprints. No automated scan validation or runtime compatibility check was performed during the documentation update.
+
+An earlier copy is preserved in [cybersecurity](https://github.com/Raghava-Gatadi/cybersecurity).
